@@ -16,9 +16,9 @@ DTYPE="bfloat16, half"
 IFS=', '
         for dt in $DTYPE
         do
-                for bs in 1 4 8 16;
+                for tp in 8 4 2;
                 do 
-                        for tp in 8 4 2;
+                        for bs in 1 4 8 16;
                         do
                         LOG_PATH=$LOG_DIR/${model_name}_tp${tp}_bs${bs}_${dt}_latency.txt
                         LOG_PROCESS_PATH=$LOG_DIR/${model_name}_tp${tp}_bs${bs}_${dt}_latency_process.txt
