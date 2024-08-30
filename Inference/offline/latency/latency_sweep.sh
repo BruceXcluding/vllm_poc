@@ -20,8 +20,8 @@ IFS=', '
                 do 
                         for tp in 8 4 2;
                         do
-                        LOG_PATH=$LOG_DIR/${model_name}_tp${tp}_bs${bs}_dtype${dt}_latency.txt
-                        LOG_PROCESS_PATH=$LOG_DIR/${model_name}_tp${tp}_bs${bs}_dtype${dt}_latency_process.txt
+                        LOG_PATH=$LOG_DIR/${model_name}_tp${tp}_bs${bs}_${dt}_latency.txt
+                        LOG_PROCESS_PATH=$LOG_DIR/${model_name}_tp${tp}_bs${bs}_${dt}_latency_process.txt
                         bash run_vllm.sh 0 $MODEL $dt $tp $bs |& tee $LOG_PATH
                         echo "latency(ms) prefill:" > $LOG_PROCESS_PATH
                         cat $LOG_PATH| grep "Avg" |awk -F' ' '{print $(NF-1)*1000}' |awk -v tp="$tp" '(NR-1)%tp==0'|head -n 4 >>$LOG_PROCESS_PATH
