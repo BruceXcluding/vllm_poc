@@ -25,7 +25,7 @@ IFS=', '
                                 echo " " 2>&1 | tee $LOG_PATH
                                 echo "[INFO] THROUGHPUT" 2>&1 | tee $LOG_PATH
                                 echo $model_name $tp $inp $out $dt 2>&1 |
-                                python  /app/vllm/benchmarks/benchmark_throughput.py --model $MODEL --trust-remote-code --dtype $dt --num-prompts=1000 --input-len $int --output-len $out --tensor-parallel-size $tp --output-json ${model_name}_${int}_${out}_tp${tp}_{dt}.json 2>&1 | tee $LOG_PATH
+                                python  /app/vllm/benchmarks/benchmark_throughput.py --model $MODEL --trust-remote-code --dtype $dt --num-prompts=1000 --input-len $int --output-len $out --tensor-parallel-size $tp --output-json ${model_name}_${int}_${out}_tp${tp}_${dt}.json 2>&1 | tee $LOG_PATH
                                 done
                         done
                 done
