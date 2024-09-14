@@ -23,7 +23,7 @@ run_vllm.sh:
 
 latency_sweep.sh:
 
-![results diagram](./images/input.png) 
+![results diagram](./images/results.png) 
 
 ### Modify params
 
@@ -32,6 +32,14 @@ latency_sweep.sh:
 ![params diagram](./images/params.png) 
 
 ### Profile
+
+```bash
+Profle:
+bash run_vllm 1
+
+non-Profile:
+bash run_vllm 0
+```
 
 
 ## 3. Offline Throughput Benchmark
