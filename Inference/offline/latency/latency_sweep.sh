@@ -23,7 +23,13 @@ IFS=', '
                         do
                         LOG_PATH=$LOG_DIR/${model_name}_tp${tp}_bs${bs}_${dt}_latency.txt
                         LOG_PROCESS_PATH=$LOG_DIR/${model_name}_tp${tp}_bs${bs}_${dt}_latency_process.txt
-                        bash run_vllm.sh 0 $MODEL $dt $tp $bs |& tee $LOG_PATH
+                        if [ $tp -eq 8 ];then
+                                bash run_vllm.sh 0 $MODEL $dt $tp $bs |& tee $LOG_PATH
+                        elif [ $tp -eq 2 ];then
+                                HIP_VISIBLE_DEVICES=0,1 bash run_vllm.sh 0 $MODEL $dt $tp $bs |& tee $LOG_PATH
+                        else
+                                HIP_VISIBLE_DEVICES=0,1,2,3 bash run_vllm.sh 0 $MODEL $dt $tp $bs |& tee $LOG_PATH
+                        fi
                         echo "Avg results:" > $LOG_PROCESS_PATH
                         cat $LOG_PATH| grep "Avg" >>$LOG_PROCESS_PATH
                         echo "latency(ms) prefill:" > $LOG_PROCESS_PATH
