@@ -41,6 +41,10 @@ non-Profile:
 bash run_vllm 0
 ```
 
+latency_sweep.sh:
+
+![profile diagram](./images/profile.png) 
+
 
 ## 3. Offline Throughput Benchmark
 
