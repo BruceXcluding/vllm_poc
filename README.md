@@ -21,6 +21,10 @@ run_vllm.sh:
 
 ![input diagram](./images/input.png) 
 
+latency_sweep.sh:
+
+![results diagram](./images/input.png) 
+
 ### Modify params
 
 latency_sweep.sh:
