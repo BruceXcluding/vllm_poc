@@ -17,17 +17,17 @@ cd Inference/offline/latency
 bash latency_sweep.sh
 ```
 ### Modify input_len
-run_vllm.sh:
+#### run_vllm.sh:
 
 ![input diagram](./images/input.png) 
 
-latency_sweep.sh:
+#### latency_sweep.sh:
 
 ![results diagram](./images/results.png) 
 
 ### Modify params
 
-latency_sweep.sh:
+#### latency_sweep.sh:
 
 ![params diagram](./images/params.png) 
 
@@ -41,7 +41,7 @@ non-Profile:
 bash run_vllm 0
 ```
 
-latency_sweep.sh:
+#### latency_sweep.sh:
 
 ![profile diagram](./images/profile.png) 
 
