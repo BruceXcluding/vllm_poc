@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#MODEL_NAME="Meta-Llama-3-70B, Llama-2-70b-hf, Mixtral-8x22B-v0.1" 
-MODEL_NAME="Meta-Llama-3.1-70B"
+MODEL_NAME="Meta-Llama-3.1-70B, Meta-Llama-3-70B"
 IFS=', '
 for model_name in $MODEL_NAME
 do
