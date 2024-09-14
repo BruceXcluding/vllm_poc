@@ -2,7 +2,7 @@
 
 PWD=$(pwd)
 SLOT_DIR=/app
-VLLM_DIR=$SLOT_DIR/vllm
+VLLM_DIR=$SLOT_DIR/rocm_vllm
 
 if [ $1 -eq 1 ];then
 
