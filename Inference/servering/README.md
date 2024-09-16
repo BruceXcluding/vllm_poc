@@ -70,9 +70,9 @@ python benchmark.py --config configs/mixtral_config.yaml
 ```Distribution prompts type```:
 
 ```bash
-Input: 0.8 * max_input_len - max_input_len ex. 1k input, 800-1000
-Output: 0.6 * max_input_len - max_input_len ex. 0.5k input, 300-500
-Concurrency
+Input: 0.8 * max_input_len - max_input_len ex. 16k input, 1200-16000
+Output: 0.6 * max_input_len - max_input_len ex. 0.2k input, 120-200
+Concurrency: 1
 Num Prompts: 20 * concurrency
 ```
 
