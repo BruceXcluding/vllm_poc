@@ -33,7 +33,7 @@ python /app/rocm_vllm/benchmarks/benchmark_serving.py --port 8011 --model /data/
 
 #### Modify params
 
-Stable prompts type:
+```Stable prompts type```:
 
 ```bash
 dataset-name: random
@@ -67,7 +67,7 @@ python benchmark.py --config configs/mixtral/mixtral_config.yaml
 
 #### Modify params
 
-Distribution prompts type:
+```Distribution prompts type```:
 
 ```bash
 Input: 0.8 * max_input_len - max_input_len ex. 1k input, 800-1000
