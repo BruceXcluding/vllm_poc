@@ -54,4 +54,4 @@ bash run.sh
 ```
 
 ## 4. Servering Throughput Benchmark
-* [**Section - Workflow**](./Inference/serving/README.md)
+* [**Section - Workflow**](./Inference/servering/README.md)
