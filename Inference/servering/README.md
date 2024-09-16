@@ -78,7 +78,7 @@ Num Prompts: 20 * concurrency
 
 ex. marked
 
-![serverparams diagram](./images/serverparams.png) 
+![serverparams diagram](../../images/serverparams.png) 
 
 
 
