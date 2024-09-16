@@ -1,0 +1,41 @@
+#####
+framework: vllm
+model_type: mixtral
+model_path: /data/Mixtral-8x22B-v0.1/ 
+url: http://localhost:8011/v1/completions
+stop: prompt
+ignore_eos: true
+log: true
+log_level: INFO
+verbose: true
+timeout: 300
+cache_dir: null
+log_dir: null
+result_dir: null
+
+#####
+# Tips:
+# * shareGPT: files like `shareGPT_*_all_*.json` in `test_prompt/` is pre-processed promptList files,
+#   which can be used directly by `load_promptlist_path`. However, due to different models has different tokenizer,
+#   these files are not generic. Also it isn't support to automatically to use right file, so switch file is needed for user.
+# * max_new_tokens: this param is only used to unify the number of generated tokens for all requests,
+#   it won't affect the request itself, for example, early termination.
+#####
+pmt_opts:
+  max_input_len: 16000
+  min_input_len: 12800
+  max_new_tokens: null
+  max_output_len: 200 # always 500
+  min_output_len: 120 # always 300
+  prompt_len: null
+  prompt_mode: normal_distribution
+  #prompt_source_path: /local_model_root/model/datasets/ShareGPT_V3_unfiltered_cleaned_split.json
+  random: false
+  size: 20 # should be always:  20 * concurrency
+  tokenizer_dir: /data/Mixtral-8x22B-v0.1/
+  trust_remote_code: true
+
+#####
+rs_opts:
+  mode: CONCURRENCY
+  concurrency: 1
