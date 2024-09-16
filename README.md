@@ -52,3 +52,6 @@ bash run_vllm 0
 cd Inference/offline/throughput
 bash run.sh
 ```
+
+## 4. Servering Throughput Benchmark
+* [**Section - Workflow**](./Inference/serving/README.md)
