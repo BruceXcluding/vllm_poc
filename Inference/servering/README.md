@@ -19,7 +19,7 @@ sudo docker run -it --network=host --shm-size 16g -v /home/:/work -v /data/model
 
 ```bash
 sudo docker exec -it vllm_server bash
-### git vllm_poc repo
+### git clone vllm_poc repo
 cd Inference/servering/public
 bash start_server.sh
 ```
