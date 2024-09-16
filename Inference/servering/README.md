@@ -62,7 +62,7 @@ sudo docker exec -it vllm_client bash
 ### git clone vllm_poc repo
 cp /vllm_poc/Inference/serving/Alibaba/mixtral_config.yaml /app/Alibaba_POC-main/ai_workload/inference_vllm/sever-mode-test/serving_benchmarks/configs/
 cd /app/Alibaba_POC-main/ai_workload/inference_vllm/sever-mode-test/serving_benchmarks/
-python benchmark.py --config configs/mixtral/mixtral_config.yaml
+python benchmark.py --config configs/mixtral_config.yaml
 ```
 
 #### Modify params
