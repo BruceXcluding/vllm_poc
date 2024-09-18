@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODEL_NAME="Meta-Llama-3.1-70B, Meta-Llama-3-70B"
+MODEL_NAME="Mixtral-8x22B-v0.1, Meta-Llama-3.1-70B, Meta-Llama-3-70B"
 IFS=', '
 for model_name in $MODEL_NAME
 do
@@ -12,7 +12,7 @@ if [ ! -d "$LOG_DIR" ]; then
 else
         echo "dir is exit: $LOG_DIR"
 fi
-DTYPE="bfloat16, half"
+DTYPE="half, bfloat16"
 IFS=', '
         for dt in $DTYPE
         do
