@@ -26,7 +26,7 @@ If vllm could not read the moe tuning config file correctly on the machine, we n
 
 ```bash
 cd /app/rocm_vllm/benchmarks/kernels
-python benchmark_mixtral_moe_rocm.py --TP 2 —model 8x22B
+python benchmark_mixtral_moe_rocm.py --TP 2 --model 8x22B
 Step-2 will dump a .json file. Copy it to /app/rocm_vllm/vllm/model_executor/layers/fused_moe/configs. name：
 "…AMD_Instinct_MI300X_OAM.json"
 ```
