@@ -10,8 +10,28 @@ sudo docker run -it --network=host --shm-size 16g -v /home/:/work -v /data/model
 sudo docker exec -it vllm_poc bash
 export PYTORCH_TUNABLEOP_ENABLED=0
 ```
+or
+#### Docker image:rocmshared/pytorch-private:ROCm6.2_hipblaslt0.10.0_pytorch2.5_vllm0.6.0_moe_final_v0.6.0
 
-## 2. Offline Latency Benchmark
+```bash
+sudo docker run -it --network=host --shm-size 16g -v /home/:/work -v /data/models:/data --env HF_HOME=/data --env TOKENIZERS_PARALLELISM=false --device=/dev/kfd --device=/dev/dri --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --ipc=host -d --name vllm_poc rocmshared/pytorch-private:ROCm6.2_hipblaslt0.10.0_pytorch2.5_vllm0.6.0_moe_final_v0.6.0
+
+sudo docker exec -it vllm_poc bash
+```
+## 2. MoE Tuning (Optional)
+
+If vllm could not read the moe tuning config file correctly on the machine, we need to re-tune the correct machine name. The defualt config file named "AMD_Radeon_Graphics.json".
+
+### Steps to do tuning
+
+```bash
+cd /app/rocm_vllm/benchmarks/kernels
+python benchmark_mixtral_moe_rocm.py --TP 2 —model 8x22B
+Step-2 will dump a .json file. Copy it to /app/rocm_vllm/vllm/model_executor/layers/fused_moe/configs. name：
+"…AMD_Instinct_MI300X_OAM.json"
+```
+
+## 3. Offline Latency Benchmark
 
 ### Command to start test
 
@@ -49,7 +69,7 @@ bash run_vllm 0
 ![profile diagram](./images/profile.png) 
 
 
-## 3. Offline Throughput Benchmark
+## 4. Offline Throughput Benchmark
 
 ```bash
 cd Inference/offline/throughput
