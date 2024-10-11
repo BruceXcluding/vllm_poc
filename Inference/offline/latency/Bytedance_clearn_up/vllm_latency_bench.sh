@@ -87,7 +87,7 @@ if [ -z "$MODEL_NAME" ]; then
     usage
 fi
 
-echo "=hyper params start="
+echo "====Hyper Params Start===="
 echo $MODEL_NAME
 echo $INPUT_LEN_SP
 echo $OUTPUT_LEN_SP
@@ -110,7 +110,7 @@ if [ $profile == "True" ];then
                     for input_len in $isl; do
                         for gen_len in $osl; do 
                             in_out_dims="${input_len},${gen_len}"
-                            echo "TP: $tp, BS: $bs, ISL/OSL: $in_out_dims"
+                            echo "=====TP: $tp, BS: $bs, ISL/OSL: $in_out_dims===="
                             python $VLLM_DIR/benchmarks/benchmark_latency_tps.py --model $model_path --distributed-executor-backend mp --num-scheduler-steps $num_scheduler_steps --input-len $input_len --output-len $gen_len --batch-size $bs --tensor-parallel-size $tp --dtype $dt --num-iters-warmup $num_iters_warmup --num-iters $num_iters --profile --profile-result-dir $PWD
                         done
                     done 
