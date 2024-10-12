@@ -7,7 +7,7 @@ sudo docker run -it --network=host --shm-size 16g -v /data/models/:/data --env H
 ## Benchmark
 
 ```
-sudo docke exec -it vllm_poc bash
+sudo docker exec -it vllm_poc bash
 cd /app/vllm_poc
 ```
 
