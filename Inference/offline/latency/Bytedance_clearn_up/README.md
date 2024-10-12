@@ -11,22 +11,22 @@ sudo docker exec -it vllm_poc bash
 cd /app/vllm_poc
 ```
 
-#### Test 1 - input 8K; output 100; bs=1,4,8,16,32,40,48,64,80,96,112,120,128,224,240
+#### Test 1 - input 8K; output 100; bs=1,4,8,16,32,40,48,64,80,96,112,120,128,224,240; tp=8
 ```
 bash run.sh --test1 True --test2 False --test3 False --prefill_test False
 ```
 
-#### Test 2 - input 16K; output 100; bs=1,4,8,9
+#### Test 2 - input 16K; output 100; bs=1,4,8,9; tp=2
 ```
 bash run.sh --test1 False --test2 True --test3 False --prefill_test False
 ```
 
-#### Test 3 - input 2K,4K,6K,8K,16K; output=100; bs=32,16,48
+#### Test 3 - input 2K,4K,6K,8K,16K; output=100; bs=32,16,48; tp=8
 ```
 bash run.sh --test1 False --test2 False --test3 True --prefill_test False
 ```
 
-#### Prefill test - input 2K,4K,6K,8K,16K; output 1; bs=1
+#### Prefill test - input 2K,4K,6K,8K,16K; output 1; bs=1; tp=8
 ```
 bash run.sh --test1 False --test2 False --test3 False --prefill_test True
 ```
