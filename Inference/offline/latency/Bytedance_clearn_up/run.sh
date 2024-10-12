@@ -55,7 +55,7 @@ fi
 if  [ "$TEST3" == "True" ]; then 
         LOG_PATH_TEST3=$LOG_DIR/${model_name}_test3.log
         LOG_PROCESS_PATH_TEST3=$LOG_DIR/${model_name}_test3_results.txt
-        bash vllm_latency_bench.sh --if_profile False --model_name $model_name --input_len 2048,4096,6144,8192,16384 --output_len 100 --data_type half --tp 8 --batch_size 32 --num_scheduler_steps 20 --num_iters_warmup 1 --num_iters 3 |& tee $LOG_PATH_TEST3
+        bash vllm_latency_bench.sh --if_profile False --model_name $model_name --input_len 2048,4096,6144,8192,16384 --output_len 100 --data_type half --tp 8 --batch_size 32,16,48 --num_scheduler_steps 20 --num_iters_warmup 1 --num_iters 3 |& tee $LOG_PATH_TEST3
         cat $LOG_PATH_TEST3| grep "Metrics" >> $LOG_PROCESS_PATH_TEST3
 fi
 
