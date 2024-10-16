@@ -41,6 +41,11 @@ while [[ "$#" -gt 0 ]]; do
         *) echo "Unknown parameter passed: $1"; usage ;; 
     esac 
     shift
+        case $1 in 
+        --gpu-memory-utilization) MEM="$2"; shift ;;
+        *) echo "Unknown parameter passed: $1"; usage ;; 
+    esac 
+    shift 
     case $1 in 
         --num_scheduler_steps) NUM_SCHEDULER_STEPS="$2"; shift ;;
         *) echo "Unknown parameter passed: $1"; usage ;; 
@@ -96,6 +101,7 @@ echo $DATA_TYPE_SP
 profile=$IF_PROFILE
 model_path=$MODEL_ROOT/$MODEL_NAME 
 tp=$TP
+mem=$MEM
 data_type=$DATA_TYPE_SP
 isl=$INPUT_LEN_SP
 osl=$OUTPUT_LEN_SP
@@ -123,7 +129,7 @@ else
                         for gen_len in $osl; do 
                             in_out_dims="${input_len},${gen_len}"
                             echo "TP: $tp, BS: $bs, ISL/OSL: $in_out_dims"
-                            python $VLLM_DIR/benchmarks/benchmark_latency_tps.py --model $model_path --distributed-executor-backend mp --num-scheduler-steps $num_scheduler_steps --input-len $input_len --output-len $gen_len --batch-size $bs --tensor-parallel-size $tp --dtype $dt --num-iters-warmup $num_iters_warmup --num-iters $num_iters
+                            python $VLLM_DIR/benchmarks/benchmark_latency_tps.py --model $model_path --gpu-memory-utilization $mem --distributed-executor-backend mp --num-scheduler-steps $num_scheduler_steps --input-len $input_len --output-len $gen_len --batch-size $bs --tensor-parallel-size $tp --dtype $dt --num-iters-warmup $num_iters_warmup --num-iters $num_iters
                         done
                     done 
             done 
