@@ -50,6 +50,33 @@ def main(args: argparse.Namespace):
         enable_prefix_caching=args.enable_prefix_caching,
         num_scheduler_steps=args.num_scheduler_steps,
     )
+    llm_p = LLM(
+        model=args.model,
+        speculative_model=args.speculative_model,
+        num_speculative_tokens=args.num_speculative_tokens,
+        speculative_draft_tensor_parallel_size=\
+            args.speculative_draft_tensor_parallel_size,
+        tokenizer=args.tokenizer,
+        quantization=args.quantization,
+        tensor_parallel_size=args.tensor_parallel_size,
+        trust_remote_code=args.trust_remote_code,
+        dtype=args.dtype,
+        max_model_len=args.max_model_len,
+        enforce_eager=args.enforce_eager,
+        kv_cache_dtype=args.kv_cache_dtype,
+        quantization_param_path=args.quantization_param_path,
+        device=args.device,
+        ray_workers_use_nsight=args.ray_workers_use_nsight,
+        use_v2_block_manager=args.use_v2_block_manager,
+        enable_chunked_prefill=False,
+        download_dir=args.download_dir,
+        block_size=args.block_size,
+        gpu_memory_utilization=args.gpu_memory_utilization,
+        load_format=args.load_format,
+        distributed_executor_backend=args.distributed_executor_backend,
+        otlp_traces_endpoint=args.otlp_traces_endpoint,
+        enable_prefix_caching=args.enable_prefix_caching,
+    )
 
     output_lens = [1] if args.output_len == 1 else [1, args.output_len]
     results = {}
@@ -78,15 +105,25 @@ def main(args: argparse.Namespace):
                         ],
                         on_trace_ready=torch.profiler.tensorboard_trace_handler(
                             str(profile_dir))) as p:
-                    llm.generate(dummy_prompts,
-                                sampling_params=sampling_params,
-                                use_tqdm=False)
+                    if output_len == 1:
+                        llm_p.generate(dummy_prompts,
+                                    sampling_params=sampling_params,
+                                    use_tqdm=False)
+                    else:
+                        llm.generate(dummy_prompts,
+                                    sampling_params=sampling_params,
+                                    use_tqdm=False)
                 print(p.key_averages())
             else:
                 start_time = time.perf_counter()
-                llm.generate(dummy_prompts,
-                            sampling_params=sampling_params,
-                            use_tqdm=False)
+                if output_len == 1:
+                    llm_p.generate(dummy_prompts,
+                                sampling_params=sampling_params,
+                                use_tqdm=False)
+                else:
+                    llm.generate(dummy_prompts,
+                                sampling_params=sampling_params,
+                                use_tqdm=False)
                 end_time = time.perf_counter()
                 latency = end_time - start_time
                 return latency
