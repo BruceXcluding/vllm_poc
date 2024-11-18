@@ -107,23 +107,23 @@ def main(args: argparse.Namespace):
                             str(profile_dir))) as p:
                     if output_len == 1:
                         llm_p.generate(dummy_prompts,
-                                    sampling_params=sampling_params,
-                                    use_tqdm=False)
+                                       sampling_params=sampling_params,
+                                       use_tqdm=False)
                     else:
                         llm.generate(dummy_prompts,
-                                    sampling_params=sampling_params,
-                                    use_tqdm=False)
+                                     sampling_params=sampling_params,
+                                     use_tqdm=False)
                 print(p.key_averages())
             else:
                 start_time = time.perf_counter()
                 if output_len == 1:
                     llm_p.generate(dummy_prompts,
-                                sampling_params=sampling_params,
-                                use_tqdm=False)
+                                   sampling_params=sampling_params,
+                                   use_tqdm=False)
                 else:
                     llm.generate(dummy_prompts,
-                                sampling_params=sampling_params,
-                                use_tqdm=False)
+                                 sampling_params=sampling_params,
+                                 use_tqdm=False)
                 end_time = time.perf_counter()
                 latency = end_time - start_time
                 return latency
@@ -165,11 +165,11 @@ def main(args: argparse.Namespace):
         results["percentiles"] = (dict(zip(percentages, percentiles.tolist())),)
         
     print("\n====Metrics Results====")
-    print(f"Metircs input_len: {args.input_len}, output_len: {args.output_len}, batch_size: {args.batch_size}, TP_size: {args.tensor_parallel_size}")
+    print(f"Metrics input_len: {args.input_len}, output_len: {args.output_len}, batch_size: {args.batch_size}, TP_size: {args.tensor_parallel_size}")
     print("====Metrics Latency (seconds)====")
     print(f'Metrics TTFT: {results["TTFT"]:.5f} seconds')
     if "avg_decode" in results and "avg_latency" in results:
-        print(f'Metircs Avg decode: {results["avg_decode"]:.5f} seconds')
+        print(f'Metrics Avg decode: {results["avg_decode"]:.5f} seconds')
         # print(f'Avg decode per token: {results["avg_decode_per_token"]:.5f} seconds')
         print(f'Metrics Avg latency: {results["avg_latency"]:.5f} seconds')
         
